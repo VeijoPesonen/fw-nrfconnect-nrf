@@ -48,8 +48,17 @@ static int _nrf_modem_lib_init(const struct device *unused)
 
 	const nrf_modem_init_params_t init_params = {
 		.trace_on = true,
-		.memory_address = NRF_MODEM_RESERVED_MEMORY_ADDRESS,
-		.memory_size = NRF_MODEM_RESERVED_MEMORY_SIZE
+		.memory_config = {
+			.address = NRF_MODEM_RESERVED_MEMORY_ADDRESS,
+			.size = NRF_MODEM_RESERVED_MEMORY_SIZE,
+		},
+		.api_config = {
+#ifdef CONFIG_NRF_MODEM_LIB_GNSS_API_V1
+			.gnss_version = NRF_GNSS_API_VERSION_1,
+#else
+			.gnss_version = NRF_GNSS_API_VERSION_2,
+#endif
+		},
 	};
 
 	init_ret = nrf_modem_init(&init_params);
