@@ -1,0 +1,19 @@
+#
+# Copyright (c) 2021 Nordic Semiconductor
+#
+# SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+#
+
+config NRF91_LWM2M_APP
+	bool "nRF91 LWM2M client application library"
+	select NRF_MODEM_LIB
+	select AT_CMD_PARSER
+
+if NRF91_LWM2M_APP
+
+module = NRF91_LWM2M_APP
+module-dep = LOG
+module-str = nRF91 LWM2M client applicaton library
+source "${ZEPHYR_BASE}/subsys/logging/Kconfig.template.log_config"
+
+endif # NRF91_LWM2M_APP

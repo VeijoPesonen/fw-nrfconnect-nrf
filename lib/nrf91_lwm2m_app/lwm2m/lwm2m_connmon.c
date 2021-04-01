@@ -7,11 +7,12 @@
 #include <zephyr.h>
 #include <stdlib.h>
 #include <net/lwm2m.h>
+#include <net/nrf91_lwm2m_app.h>
 
 #include <modem/modem_info.h>
 
 #include <logging/log.h>
-LOG_MODULE_REGISTER(app_lwm2m_connmon, CONFIG_APP_LOG_LEVEL);
+LOG_MODULE_REGISTER(lwm2m_connmon, CONFIG_NRF91_LWM2M_APP_LOG_LEVEL);
 
 static struct modem_param_info modem_param;
 static struct k_work modem_data_work;

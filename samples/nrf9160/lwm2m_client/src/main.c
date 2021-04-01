@@ -12,6 +12,9 @@
 #include <modem/nrf_modem_lib.h>
 #include <settings/settings.h>
 
+#include <net/nrf91_lwm2m_app.h>
+#include <net/nrf91_lwm2m_fota.h>
+
 #include <logging/log.h>
 LOG_MODULE_REGISTER(app_lwm2m_client, CONFIG_APP_LOG_LEVEL);
 
@@ -25,8 +28,7 @@ LOG_MODULE_REGISTER(app_lwm2m_client, CONFIG_APP_LOG_LEVEL);
 #endif
 
 #include "ui.h"
-#include "lwm2m_client.h"
-#include "settings.h"
+#include "lwm2m_client_app.h"
 
 #if !defined(CONFIG_LTE_LINK_CONTROL)
 #error "Missing CONFIG_LTE_LINK_CONTROL"
@@ -125,8 +127,11 @@ static int query_modem(const char *cmd, char *buf, size_t buf_len)
 
 static int lwm2m_setup(void)
 {
+	/* Manufacturer independent */
+	lwm2m_init_device();
+	/* Manufacturer dependent */
 	/* use IMEI as serial number */
-	lwm2m_init_device(imei_buf);
+	lwm2m_app_init_device(imei_buf);
 	lwm2m_init_security(&client, endpoint_name);
 #if defined(CONFIG_LWM2M_LOCATION_OBJ_SUPPORT)
 	lwm2m_init_location();

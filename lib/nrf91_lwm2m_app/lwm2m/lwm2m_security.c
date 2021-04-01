@@ -6,9 +6,10 @@
 
 #include <zephyr.h>
 #include <net/lwm2m.h>
+#include <net/nrf91_lwm2m_app.h>
 
 #include <logging/log.h>
-LOG_MODULE_REGISTER(app_lwm2m_security, CONFIG_APP_LOG_LEVEL);
+LOG_MODULE_REGISTER(lwm2m_security, CONFIG_NRF91_LWM2M_APP_LOG_LEVEL);
 
 #include "config.h"
 

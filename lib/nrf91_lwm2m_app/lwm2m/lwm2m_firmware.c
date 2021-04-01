@@ -16,10 +16,11 @@
 #include <modem/nrf_modem_lib.h>
 #include <power/reboot.h>
 
-#include "settings.h"
+#include <net/nrf91_lwm2m_app.h>
+#include <net/nrf91_lwm2m_fota.h>
 
 #include <logging/log.h>
-LOG_MODULE_REGISTER(app_lwm2m_firmware, CONFIG_APP_LOG_LEVEL);
+LOG_MODULE_REGISTER(lwm2m_firmware, CONFIG_NRF91_LWM2M_APP_LOG_LEVEL);
 
 #define BYTE_PROGRESS_STEP (1024 * 10)
 #define REBOOT_DELAY       K_SECONDS(1)
