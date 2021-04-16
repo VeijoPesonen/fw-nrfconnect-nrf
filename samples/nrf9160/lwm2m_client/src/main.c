@@ -416,11 +416,13 @@ void main(void)
 
 	ui_init(ui_evt_handler);
 
+#if defined(CONFIG_LWM2M_FIRMWARE_UPDATE_OBJ_SUPPORT)
 	ret = fota_settings_init();
 	if (ret < 0) {
 		LOG_ERR("Unable to init settings (%d)", ret);
 		return;
 	}
+#endif
 
 	/* Load *all* persistent settings */
 	settings_load();
@@ -452,11 +454,13 @@ void main(void)
 		return;
 	}
 
+#if defined(CONFIG_LWM2M_FIRMWARE_UPDATE_OBJ_SUPPORT)
 	ret = lwm2m_init_image();
 	if (ret < 0) {
 		LOG_ERR("Failed to setup image properties (%d)", ret);
 		return;
 	}
+#endif
 
 #if defined(CONFIG_LWM2M_DTLS_SUPPORT)
 	ret = modem_key_mgmt_write(client.tls_tag,
