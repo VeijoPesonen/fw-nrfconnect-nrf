@@ -15,11 +15,9 @@
 #include <logging/log.h>
 LOG_MODULE_REGISTER(app_lwm2m_device, CONFIG_APP_LOG_LEVEL);
 
-#define CLIENT_MANUFACTURER	"Nordic Semiconductor ASA"
-#define CLIENT_MODEL_NUMBER	CONFIG_BOARD
-#define CLIENT_DEVICE_TYPE	"OMA-LWM2M Client"
-#define CLIENT_HW_VER		CONFIG_SOC
-#define CLIENT_FLASH_SIZE	PM_MCUBOOT_SECONDARY_SIZE
+#define CLIENT_MODEL_NUMBER CONFIG_BOARD
+#define CLIENT_HW_VER CONFIG_SOC
+#define CLIENT_FLASH_SIZE PM_MCUBOOT_SECONDARY_SIZE
 
 static uint8_t bat_idx = LWM2M_DEVICE_PWR_SRC_TYPE_BAT_INT;
 static int bat_mv = 3800;
@@ -43,8 +41,8 @@ static int device_factory_default_cb(uint16_t obj_inst_id, uint8_t *args,
 
 int lwm2m_app_init_device(char *serial_num)
 {
-	lwm2m_engine_set_res_data("3/0/0", CLIENT_MANUFACTURER,
-				  sizeof(CLIENT_MANUFACTURER),
+	lwm2m_engine_set_res_data("3/0/0", CONFIG_APP_MANUFACTURER,
+				  sizeof(CONFIG_APP_MANUFACTURER),
 				  LWM2M_RES_DATA_FLAG_RO);
 	lwm2m_engine_set_res_data("3/0/1", CLIENT_MODEL_NUMBER,
 				  sizeof(CLIENT_MODEL_NUMBER),
@@ -52,8 +50,8 @@ int lwm2m_app_init_device(char *serial_num)
 	lwm2m_engine_set_res_data("3/0/2", serial_num, strlen(serial_num),
 				  LWM2M_RES_DATA_FLAG_RO);
 	lwm2m_engine_register_exec_callback("3/0/5", device_factory_default_cb);
-	lwm2m_engine_set_res_data("3/0/17", CLIENT_DEVICE_TYPE,
-				  sizeof(CLIENT_DEVICE_TYPE),
+	lwm2m_engine_set_res_data("3/0/17", CONFIG_APP_DEVICE_TYPE,
+				  sizeof(CONFIG_APP_DEVICE_TYPE),
 				  LWM2M_RES_DATA_FLAG_RO);
 	lwm2m_engine_set_res_data("3/0/18", CLIENT_HW_VER,
 				  sizeof(CLIENT_HW_VER),
