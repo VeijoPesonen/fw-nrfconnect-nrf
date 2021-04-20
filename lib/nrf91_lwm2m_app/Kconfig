@@ -4,65 +4,11 @@
 # SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
 #
 
-menuconfig NRF91_LWM2M_APP
+config NRF91_LWM2M_APP
 	bool "nRF91 LWM2M client application library"
-	select NRF_MODEM_LIB
 	select LWM2M
-	select NETWORKING
-	select NET_SOCKETS
-	select NET_SOCKETS_OFFLOAD
 
 if NRF91_LWM2M_APP
-
-config NET_NATIVE
-	bool "Use OS native network stack(NOT SUPPORTED)"
-	default n
-
-config LWM2M_DNS_SUPPORT
-	bool "DNS support"
-	default y
-
-config LWM2M_DTLS_SUPPORT
-	bool "DTLS support"
-	default y
-
-config LWM2M_PEER_PORT
-	int "Peer port"
-	default 5684
-
-config LWM2M_SECURITY_KEY_SIZE
-	int "Security key size. Support HEX style PSK values (double the size + NULL char)"
-	default 33
-
-menu "CoAP adjustments"
-
-config COAP_INIT_ACK_TIMEOUT_MS
-	int "Extended CoAP retry timing to for LTE-M/NB-IoT [ms]"
-	default 10000
-
-config COAP_EXTENDED_OPTIONS_LEN
-	bool "Enable CoAP extended option length"
-	default y
-
-if COAP_EXTENDED_OPTIONS_LEN
-config COAP_EXTENDED_OPTIONS_LEN_VALUE
-	int "CoAP extended option length"
-	default 40
-
-endif #COAP_EXTENDED_OPTIONS_LEN
-endmenu
-
-config LWM2M_SERVER_DEFAULT_PMIN
-	int "Server PMIN"
-	default 1
-
-config LWM2M_SERVER_DEFAULT_PMAX
-	int "Server PMAX"
-	default 300
-
-config LWM2M_RW_JSON_SUPPORT
-	bool "RW JSON support"
-	default n
 
 config LWM2M_CONN_MON_OBJ_SUPPORT
 	bool "Connection Monitor object support"
