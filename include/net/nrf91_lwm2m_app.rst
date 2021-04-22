@@ -7,7 +7,7 @@ nRF91 LwM2M client application
    :local:
    :depth: 2
 
-The :ref:`_lwm2m_client` sample demonstrates how to use Lightweight Machine to Machine (`LwM2M`_) protocol to connect an
+The :ref:`lwm2m_client` demonstrates how to use Lightweight Machine to Machine (`LwM2M`_) protocol to connect an
 nRF91 based device to an LwM2M server such as `Leshan Demo Server`_ via LTE. Once connected, the device can be queried
 to obtain location data, and to retrieve information about the modem.
 
@@ -37,11 +37,11 @@ The library supports the following development kit:
 
 Configuration and implementation
 ********************************
-The nRF91 LwM2M client application library is used with the :ref:`_lwm2m_client` sample. The sample could be used as a
+The nRF91 LwM2M client application library is used with the :ref:`lwm2m_client` sample. The sample could be used as a
 starting for creating your own application.
 
 By default, the library uses LTE-M for connecting and doesn't utilize a bootstrap server. LwM2M Queue mode is not in use.
-To use NB-IoT, a bootstrap server, or the queue mode please refer to the forementioned :ref:`_lwm2m_client` sample to
+To use NB-IoT, a bootstrap server, or the queue mode please refer to the forementioned :ref:`lwm2m_client` sample to
 see how these features can be taken into use.
 
 API documentation
