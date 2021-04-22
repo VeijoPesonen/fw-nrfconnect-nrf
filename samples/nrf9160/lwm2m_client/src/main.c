@@ -133,13 +133,13 @@ static int lwm2m_setup(void)
 	/* use IMEI as serial number */
 	lwm2m_app_init_device(imei_buf);
 	lwm2m_init_security(&client, endpoint_name);
-#if defined(CONFIG_LWM2M_LOCATION_OBJ_SUPPORT)
+#if defined(CONFIG_NRF91_LWM2M_APP_LOCATION_OBJ_SUPPORT)
 	lwm2m_init_location();
 #endif
-#if defined(CONFIG_LWM2M_FIRMWARE_UPDATE_OBJ_SUPPORT)
+#if defined(CONFIG_NRF91_LWM2M_APP_FIRMWARE_UPDATE_OBJ_SUPPORT)
 	lwm2m_init_firmware();
 #endif
-#if defined(CONFIG_LWM2M_CONN_MON_OBJ_SUPPORT)
+#if defined(CONFIG_NRF91_LWM2M_APP_CONN_MON_OBJ_SUPPORT)
 	lwm2m_init_connmon();
 #endif
 #if defined(CONFIG_LWM2M_IPSO_LIGHT_CONTROL)
@@ -416,7 +416,7 @@ void main(void)
 
 	ui_init(ui_evt_handler);
 
-#if defined(CONFIG_LWM2M_FIRMWARE_UPDATE_OBJ_SUPPORT)
+#if defined(CONFIG_NRF91_LWM2M_APP_FIRMWARE_UPDATE_OBJ_SUPPORT)
 	ret = fota_settings_init();
 	if (ret < 0) {
 		LOG_ERR("Unable to init settings (%d)", ret);
@@ -427,7 +427,7 @@ void main(void)
 	/* Load *all* persistent settings */
 	settings_load();
 
-#if defined(CONFIG_LWM2M_FIRMWARE_UPDATE_OBJ_SUPPORT)
+#if defined(CONFIG_NRF91_LWM2M_APP_FIRMWARE_UPDATE_OBJ_SUPPORT)
 	/* Modem FW update needs to be verified before modem is used. */
 	lwm2m_verify_modem_fw_update();
 #endif
@@ -454,7 +454,7 @@ void main(void)
 		return;
 	}
 
-#if defined(CONFIG_LWM2M_FIRMWARE_UPDATE_OBJ_SUPPORT)
+#if defined(CONFIG_NRF91_LWM2M_APP_FIRMWARE_UPDATE_OBJ_SUPPORT)
 	ret = lwm2m_init_image();
 	if (ret < 0) {
 		LOG_ERR("Failed to setup image properties (%d)", ret);
@@ -485,7 +485,7 @@ void main(void)
 	modem_connect();
 
 	while (true) {
-#if defined(CONFIG_LWM2M_CONN_MON_OBJ_SUPPORT)
+#if defined(CONFIG_NRF91_LWM2M_APP_CONN_MON_OBJ_SUPPORT)
 		ret = lwm2m_update_connmon();
 		if (ret < 0) {
 			LOG_ERR("Error registering rsrp handler (%d)", ret);

@@ -40,14 +40,14 @@ int lwm2m_init_security(struct lwm2m_ctx *ctx, char *endpoint);
  */
 int lwm2m_init_device(void);
 
-#if defined CONFIG_LWM2M_LOCATION_OBJ_SUPPORT
+#if defined CONFIG_NRF91_LWM2M_APP_LOCATION_OBJ_SUPPORT
 /**
  * @brief Initialize Location object
  */
 int lwm2m_init_location(void);
 #endif
 
-#if defined(CONFIG_LWM2M_FIRMWARE_UPDATE_OBJ_SUPPORT)
+#if defined(CONFIG_NRF91_LWM2M_APP_FIRMWARE_UPDATE_OBJ_SUPPORT)
 /**
  * @brief Firmware read callback
  */
@@ -68,7 +68,7 @@ int lwm2m_init_image(void);
 void lwm2m_verify_modem_fw_update(void);
 #endif
 
-#if defined(CONFIG_LWM2M_CONN_MON_OBJ_SUPPORT)
+#if defined(CONFIG_NRF91_LWM2M_APP_CONN_MON_OBJ_SUPPORT)
 /**
  * @brief Initialize Connection Monitor object
  */

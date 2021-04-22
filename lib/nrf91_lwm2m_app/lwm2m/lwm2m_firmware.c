@@ -25,7 +25,7 @@ LOG_MODULE_REGISTER(lwm2m_firmware, CONFIG_NRF91_LWM2M_APP_LOG_LEVEL);
 #define BYTE_PROGRESS_STEP (1024 * 10)
 #define REBOOT_DELAY       K_SECONDS(1)
 
-#if defined(CONFIG_LWM2M_FIRMWARE_UPDATE_OBJ_SUPPORT)
+#if defined(CONFIG_NRF91_LWM2M_APP_FIRMWARE_UPDATE_OBJ_SUPPORT)
 static uint8_t firmware_buf[CONFIG_LWM2M_COAP_BLOCK_SIZE];
 #endif
 
@@ -45,7 +45,7 @@ static void reboot_work_handler(struct k_work *work)
 	sys_reboot(SYS_REBOOT_COLD);
 }
 
-#if defined(CONFIG_LWM2M_FIRMWARE_UPDATE_OBJ_SUPPORT)
+#if defined(CONFIG_NRF91_LWM2M_APP_FIRMWARE_UPDATE_OBJ_SUPPORT)
 static int firmware_update_cb(uint16_t obj_inst_id, uint8_t *args,
 			    uint16_t args_len)
 {
@@ -213,7 +213,7 @@ int lwm2m_init_firmware(void)
 {
 	k_delayed_work_init(&reboot_work, reboot_work_handler);
 
-#if defined(CONFIG_LWM2M_FIRMWARE_UPDATE_OBJ_SUPPORT)
+#if defined(CONFIG_NRF91_LWM2M_APP_FIRMWARE_UPDATE_OBJ_SUPPORT)
 	lwm2m_firmware_set_update_cb(firmware_update_cb);
 	/* setup data buffer for block-wise transfer */
 	lwm2m_engine_register_pre_write_callback("5/0/0", firmware_get_buf);
