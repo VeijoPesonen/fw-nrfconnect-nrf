@@ -30,17 +30,21 @@
 extern "C" {
 #endif
 
+#if defined(CONFIG_NRF91_LWM2M_APP_SECURITY_OBJ_SUPPORT)
 /**
  * @brief Initialize Security object
  */
 int lwm2m_init_security(struct lwm2m_ctx *ctx, char *endpoint);
+#endif
 
+#if defined(CONFIG_NRF91_LWM2M_APP_DEVICE_OBJ_SUPPORT)
 /**
  * @brief Initialize Device object
  */
 int lwm2m_init_device(void);
+#endif
 
-#if defined CONFIG_NRF91_LWM2M_APP_LOCATION_OBJ_SUPPORT
+#if defined(CONFIG_NRF91_LWM2M_APP_LOCATION_OBJ_SUPPORT)
 /**
  * @brief Initialize Location object
  */

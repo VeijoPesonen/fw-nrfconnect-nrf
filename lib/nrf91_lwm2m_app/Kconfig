@@ -10,6 +10,14 @@ config NRF91_LWM2M_APP
 
 if NRF91_LWM2M_APP
 
+config NRF91_LWM2M_APP_DEVICE_OBJ_SUPPORT
+	bool "Device object support"
+	default y
+
+config NRF91_LWM2M_APP_SECURITY_OBJ_SUPPORT
+	bool "Security object support"
+	default y
+
 config NRF91_LWM2M_APP_CONN_MON_OBJ_SUPPORT
 	bool "Connection Monitor object support"
 	default y

@@ -11,9 +11,9 @@ The :ref:`lwm2m_client` demonstrates how to use Lightweight Machine to Machine (
 nRF91 based device to an LwM2M server such as `Leshan Demo Server`_ via LTE. Once connected, the device can be queried
 to obtain location data, and to retrieve information about the modem.
 
-This library provides a basic set of LwM2M resources combined together to avoid the need to duplicate these
+This library provides a basic set of LwM2M objects combined together to avoid the need to duplicate these
 in all of the applications planning to communicate with an LwM2M server. Following fixed set of readily initialized
-resources are at users exposal.
+objects are at users exposal.
 
 * Firmware object
 * Connection monitoring object
@@ -52,4 +52,5 @@ API documentation
 
 .. doxygengroup:: nrf91_lwm2m_app
    :project: nrf
+   :members:
    :inner:
