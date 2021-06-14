@@ -6,6 +6,7 @@
 
 #include <zephyr.h>
 #include <stdio.h>
+#include <string.h>
 #include <nrf_modem.h>
 #include <drivers/flash.h>
 #include <dfu/dfu_target.h>
@@ -30,6 +31,8 @@ static uint8_t firmware_buf[CONFIG_LWM2M_COAP_BLOCK_SIZE];
 #ifdef CONFIG_DFU_TARGET_MCUBOOT
 static uint8_t mcuboot_buf[CONFIG_APP_MCUBOOT_FLASH_BUF_SZ] __aligned(4);
 #endif
+
+#define MAX_INSTANCE_COUNT CONFIG_LWM2M_FIRMWARE_INSTANCE_COUNT
 
 static int image_type;
 
@@ -207,11 +210,27 @@ cleanup:
 
 int lwm2m_init_firmware(void)
 {
+	int ret;
+	char path[6 + sizeof(int)]; /* '/5/%d/0' where %d denotes the obj instance id, int */
+
 	k_work_init_delayable(&reboot_work, reboot_work_handler);
 
 	lwm2m_firmware_set_update_cb(firmware_update_cb);
 	/* setup data buffer for block-wise transfer */
-	lwm2m_engine_register_pre_write_callback("5/0/0", firmware_get_buf);
+
+	for (int i = 0; i < MAX_INSTANCE_COUNT; i++) {
+		ret = snprintf(path, sizeof(path), "/5/%d/0", i);
+
+		if (ret < 0 || ret > sizeof(path)) {
+			__ASSERT(false, "invalid lwm2m fw update path, err code %d", ret);
+			return -1;
+		}
+
+		LOG_DBG("Firmware update object instance path length: %d", strlen(path));
+
+		lwm2m_engine_register_pre_write_callback(path, firmware_get_buf);
+	}
+
 	lwm2m_firmware_set_write_cb(firmware_block_received_cb);
 
 	return 0;

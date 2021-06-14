@@ -143,7 +143,9 @@ static int lwm2m_setup(void)
 	lwm2m_init_location();
 #endif
 #if defined(CONFIG_LWM2M_CLIENT_UTILS_FIRMWARE_UPDATE_OBJ_SUPPORT)
-	lwm2m_init_firmware();
+	if (lwm2m_init_firmware() < 0) {
+		goto fail;
+	}
 #endif
 #if defined(CONFIG_LWM2M_CLIENT_UTILS_CONN_MON_OBJ_SUPPORT)
 	lwm2m_init_connmon();
@@ -164,6 +166,9 @@ static int lwm2m_setup(void)
 	lwm2m_init_accel();
 #endif
 	return 0;
+
+fail:
+	return -1;
 }
 
 int lwm2m_security_index_to_inst_id(int index);
